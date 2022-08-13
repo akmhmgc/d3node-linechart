@@ -47,8 +47,6 @@ const headerStyle = `.header {
 }
 .svgFrame{
   background-color:#FFFFFF;
-  border:solid 1px #404040;
-  border-radius: 5px;
 }`
 
 function atCoderGraph({
