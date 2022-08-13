@@ -60,7 +60,7 @@ function atCoderGraph({
     bottom: 60,
     left: 50
   },
-  lineWidth: _lineWidth = 2,
+  lineWidth: _lineWidth = 1.5,
   lineColor: _lineColor = 'black',
   lineColors: _lineColors = ['black'],
   isCurve: _isCurve = false,
