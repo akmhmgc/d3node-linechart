@@ -42,8 +42,18 @@ const RANKS = [{
 },
 ]
 
+const headerStyle = `.header {
+  font: 600 18px 'Segoe UI', Ubuntu, Sans-Serif;
+}
+.svgFrame{
+  background-color:#FFFFFF;
+  border:solid 1px #404040;
+  border-radius: 5px;
+}`
+
 function atCoderGraph({
   data,
+  username: _username = 'crazyhama',
   selector: _selector = '#chart',
   container: _container = `
     <div id="container">
@@ -51,11 +61,11 @@ function atCoderGraph({
       <div id="chart"></div>
     </div>
   `,
-  style: _style = '',
+  style: _style = headerStyle,
   width: _width = 960,
   height: _height = 500,
   margin: _margin = {
-    top: 20,
+    top: 50,
     right: 20,
     bottom: 60,
     left: 50
@@ -80,6 +90,7 @@ function atCoderGraph({
   const height = _height - _margin.top - _margin.bottom;
 
   const svg = d3n.createSVG(_width, _height)
+    .attr('class', 'svgFrame')
     .append('g')
     .attr('transform', `translate(${_margin.left}, ${_margin.top})`);
 
@@ -142,6 +153,13 @@ function atCoderGraph({
       .attr("fill", color)
       .attr("fill-opacity", '0.3')
   })
+
+  const title = `${_username}'s AtCoder contest results`
+  g.append('text')
+  .attr("class", "header")
+  .attr('y', 0)
+    .text(title)
+  .attr('transform', `translate(0, -10)`)
 
   return d3n;
 }
