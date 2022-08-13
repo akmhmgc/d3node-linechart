@@ -1,7 +1,7 @@
 const D3Node = require('d3-node');
 
 const RANKS = [{
-  start: 10,
+  start: 0,
   end: 400,
   color: 'gray'
 },
@@ -135,15 +135,21 @@ function atCoderGraph({
     .attr('stroke', (d, i) => i < _lineColors.length ? _lineColors[i] : _lineColor)
     .attr('d', lineChart)
 
+  const values = data.map(d => d.value)
+  const maxValue = values.reduce((a,b)=>Math.max(a,b))
+  const minValue = values.reduce((a,b)=>Math.min(a,b))
+
   RANKS.map(({
     start,
     end,
     color
   }) => {
+    if(start >= maxValue ) return
+    if(end <= minValue ) return
     const border = d3.area()
       .x(d => xScale(d.key))
-      .y0(d => yScale(start))
-      .y1(d => yScale(end));
+      .y0(d => yScale(Math.max(minValue,start)))
+      .y1(d => yScale(Math.min(maxValue,end)));
 
     g.append('g')
       .selectAll('path')
