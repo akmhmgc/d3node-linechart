@@ -8,7 +8,7 @@ const tsvString = fs.readFileSync('data/data.tsv').toString();
 const data = d3.tsvParse(tsvString, d => {
   return {
     key: parseTime(d.date),
-    value: +d.close
+    value: +d.score
   };
 });
 
